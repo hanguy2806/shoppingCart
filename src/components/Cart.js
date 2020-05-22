@@ -1,7 +1,9 @@
 import React , {Component}from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {removeItem, addQuantity, subtractQuantity} from '../actions/cartActions'
 import Shipping from './Shipping'
+import Product from './Product';
 
 class Cart extends Component{
     handleRemove=(id)=>{
@@ -19,17 +21,15 @@ class Cart extends Component{
             this.props.cart.map(item=>{
                 return (
                     <li key ={item.id}>
-                    <img src={item.img} alt={item.img}/>
+                    {/* <img src={item.img} alt={item.img}/> */}
                     <div className="desc">
-                        <p>Title: {item.title}</p>
-                        <p>{item.desc}</p>
-                        <p><b>Price: {item.price}</b></p>
-                        <p><p>Quantity: {item.quantity}</p></p>
+                        <Product img={item.img} title={item.title} desc={item.desc} price={item.price}/>                       
+                        <p><b>Quantity: {item.quantity}</b></p> 
                     </div>
                     <div className="handle">
                     <button onClick={()=>{this.handleRemove(item.id)}}>Remove</button>
-                    <button onClick={()=>{this.handleAddQuantity(item.id)}}>+</button>
-                    <button onClick={()=>{this.handleSubQuantity(item.id)}}>-</button>
+                    <Link to='/cart' onClick={()=>{this.handleAddQuantity(item.id)}}>+</Link>
+                    <Link to='/cart' onClick={()=>{this.handleSubQuantity(item.id)}}>-</Link>
                     </div>
                     </li>
                 )

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {addToCart} from '../actions/cartActions'
+import Product from './Product'
 
 class Products extends Component{
     handleClick=(id)=>{
@@ -9,14 +10,10 @@ class Products extends Component{
     render(){
         let itemList=this.props.items.map(item=>{
             return(
-                <li key={item.id}>
-                    <img src={item.img} alt={item.img}/>
-                    <div className="desc">
-                        <p>Title: {item.title}</p> 
+                <li key={item.id}>                  
+                         <Product img={item.img} title={item.title} desc={item.desc} price={item.price}/>
                         <span><button onClick={()=>{this.handleClick(item.id)}}>add</button></span>
-                        <p>{item.desc}</p>
-                        <p><b>Price: {item.price}</b></p>                        
-                    </div>
+                 
                 </li>
             )
         })
